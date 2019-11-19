@@ -1,23 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>CellStore</title>
-  <link href="StyleSheet.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-	<ul>
-  <li><a class="active" href="index.php">Home</a></li>
-  <li><a href="listadoStock.php">Stock</a></li>
-  <li><a href="agregarReg.php">Agregar Articulo</a></li>
-  <li><a href="modificarReg.php">Modificar Articulo</a></li>
-  <li><a href="borrarRegistro.php">Eliminar Articulo</a></li>
-  <li><a href="Reportes.php">Reporte</a></li>
-</ul>
-
-
-
-
-
 <?php
 error_reporting(0);
 include("conexion.php");
@@ -29,9 +9,7 @@ $color = $_POST['color'];
 $precio = $_POST['precio'];
 $stock = $_POST['stock'];
 
-
-$sql = "insert into articulos (marca, modelo, color, precio, stock)
-VALUES ('".$marca."', '".$modelo."', '".$color."'," .$precio.", ".$stock.")";
+$sql = "INSERT INTO stockarticulos (marca, modelo, color, precio, stock) VALUES ('".$marca."', '".$modelo."', '".$color."'," .$precio.", ".$stock.")";
 
 
 if ($conn->query($sql) === TRUE) {
