@@ -1,119 +1,116 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
+    <title>Agregar Articulos</title>
+  </head>
+  <?php  
+    include "componentes/header.php";
+  ?>
+  <main>
+    <div class="row justify-content-center mt-5">
+      <form action="guardarModificacion.php" method="post">
+        <?php
+          error_reporting(0);
+          include("conexion.php");
+          $id = $_POST['id'];
 
-  <title>CellStore</title>
-  <link href="StyleSheet.css" rel="stylesheet" type="text/css">
-<body>
-  <ul>
-  <li><a href="index.php">Home</a></li>
-  <li><a class="active" href="listadoStock.php">Stock</a></li>
-  <li><a href="agregarReg.php">Agregar Articulo</a></li>
-  <li><a href="modificarReg.php">Modificar Articulo</a></li>
-  <li><a href="borrarRegistro.php">Eliminar Articulo</a></li>
-  <li><a href="Reportes.php">Reporte</a></li>
-</ul>
+          $flag = false;
 
+          $sql = "SELECT * FROM stockarticulos where idArticulo = ".$id;
+          // var_dump($sql);
+          // die();
+          $result = $conn->query($sql);
 
-<h2> Modificar un articulo</h2>
+          if ($result->num_rows > 0) 
+          {    
+            while($row =mysqli_fetch_array($result) ) 
+            {
 
-<div class="container">
-  <form action="guardarModificacion.php" method="post">
-<?php
-error_reporting(0);
-include("conexion.php");
-$id =$_POST['id'];
+            ?>
+              <div class="row">
+                <div class="col sm 10">
+                    <h1 class="h3 mb-3 text-center font-weight-normal">Modificar articulo</h1>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-6">
+                  <label>ID</label>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" name="idArticulo" class="form-control mb-1" value="<?php echo htmlspecialchars($row['idArticulo']);?>" required autofocus>
+                </div>
+              </div>
 
-$flag = false;
+              <div class="row">
+                <div class="col-sm-6">
+                  <label>Marca</label>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" name="marca" class="form-control mb-1" value="<?php echo htmlspecialchars($row['marca']);?>" required autofocus>
+                </div>
+              </div>
 
+              <div class="row">
+                <div class="col-sm-6">
+                  <label>Modelo</label>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" name="modelo" class="form-control mb-1" value="<?php echo htmlspecialchars($row['modelo']);?>" required autofocus>
+                </div>
+              </div>
 
+              <div class="row">
+                <div class="col-sm-6">
+                  <label >Color</label>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" name="color" class="form-control mb-1" value="<?php echo htmlspecialchars($row['color']);?>" required autofocus>
+                </div>
+              </div>
 
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="lprecio">Precio</label>
+                </div>
+                <div class="col-sm-6">
+                  <input type="number" name="precio" class="form-control mb-1" value="<?php echo htmlspecialchars($row['precio']);?>" required autofocus>
+                </div>
+              </div>
 
-$sql = "SELECT * FROM articulos where id = ".$id;
-$result = $conn->query($sql);
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="lname">Stock</label>
+                </div>
+                <div class="col-sm-6">
+                  <input type="number" name="stock" class="form-control mb-1" value="<?php echo htmlspecialchars($row['stock']);?>" required autofocus>
+                </div>
+              </div>
 
-
-if ($result->num_rows > 0) {
-    // salida de dato por cada fila.
-  // mysqli_fetch_array($resultados)   $result->fetch_assoc()
-    while($row =mysqli_fetch_array($result) ) {
-      echo '<div class="row">';
-      echo '<div class="col-25">';
-      echo '<label for="fname">Id</label>';
-      echo '</div>';
-      echo '<div class="col-75">';
-      echo '<input type="text" name="id" class="form-control"  value= "'.$row["id"].'" required>';
-      echo '</div>';
-      echo '</div>';
-
-
-      echo '<div class="row">';
-      echo '<div class="col-25">';
-      echo '<label for="fname">Marca</label>';
-      echo '</div>';
-      echo '<div class="col-75">';
-      echo '<input type="text" name="marca" class="form-control"  value= "'.$row["marca"].'" required >';
-      echo '</div>';
-      echo '</div>';
-    
-      echo "<br>";
-
-      echo '<div class="row">';
-      echo '<div class="col-25">';
-      echo '<label for="fname">Modelo</label>';
-      echo '</div>';
-      echo '<div class="col-75">';
-      echo '<input type="text" name="modelo" class="form-control"  value= "'.$row["modelo"].'" required >';
-      echo '</div>';
-      echo '</div>';
-
-      echo "<br>";
-
-      echo '<div class="row">';
-      echo '<div class="col-25">';
-      echo '<label for="fname">Color</label>';
-      echo '</div>';
-      echo '<div class="col-75">';
-      echo '<input type="text" name="color" class="form-control" value= "'.$row["color"].'" required >';
-      echo '</div>';
-      echo '</div>';
-
-      echo "<br>";
-
-      echo '<div class="row">';
-      echo '<div class="col-25">';
-      echo '<label for="fname">Precio</label>';
-      echo '</div>';
-      echo '<div class="col-75">';
-      echo '<input type="number" name="precio" class="form-control" value= "'.$row["precio"].'" required >';
-      echo '</div>';
-      echo '</div>';
-
-      echo "<br>";
-
-      echo '<div class="row">';
-      echo '<div class="col-25">';
-      echo '<label for="fname">Stock</label>';
-      echo '</div>';
-      echo '<div class="col-75">';
-      echo '<input type="number" name="stock" class="form-control" value= "'.$row["stock"].'" required >';
-      echo '</div>';
-      echo '</div>';
-        //echo "<td> " . $row["marca"]. "</td><td>" . $row["modelo"]. "</td><td>" . $row["color"]. "</td><td>". $row["precio"]. "</td><td>" . $row["stock"]. "</td></tr>";
-        
-    }
-} else {
-    echo "0 results";
-
-}
-$conn->close();
-?>
-  <div class="row">
-    <input type="submit" value="Guardar">
-  </div>
-  </form>
-</div>
-</form>
-</div>
-</body>
-</html>
+              <div class="row">
+                <div class="col-sm-6">
+                  <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                </div>
+              </div>
+            <?php 
+            }
+              
+          } 
+          else 
+          {
+            echo "0 results";
+          }
+          $conn->close();
+        ?>
+      </form>  
+    </div>
+  </main>
+  <?php  
+    include "componentes/footer.php";
+  ?>

@@ -1,47 +1,36 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-
-  <title>CellStore</title>
-  <link href="StyleSheet.css" rel="stylesheet" type="text/css">
-<body>
-  <ul>
-  <li><a href="index.php">Home</a></li>
-  <li><a class="active" href="listadoStock.php">Stock</a></li>
-  <li><a href="agregarReg.php">Agregar Articulo</a></li>
-  <li><a href="modificarReg.php">Modificar Articulo</a></li>
-  <li><a href="borrarRegistro.php">Eliminar Articulo</a></li>
-  <li><a href="Reportes.php">Reporte</a></li>
-</ul>
-<b><h2>Modificar un Registro</h2></b>
-
-
-<form action="hacerModificacion.php" method="post">
-
-  <div class="row">
-    <div class="col-25">
-      <label for="fname">ID</label>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
+    <title>Agregar Articulos</title>
+  </head>
+  <?php  
+    include "componentes/header.php";
+  ?>
+<main class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-sm-6">
+      <h1 class="h3 mb-3 text-center font-weight-normal">Modificar un Registro</h1>
+      <form action="hacerModificacion.php" method="post">        
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">ID</label>
+          <div class="col-sm-10">
+            <input type="text" name="id" class="form-control" placeholder="Ingresar ID a buscar" required autofocus>
+          </div>
+        </div>
+        <div class="row">
+          <button type="submit" class="btn btn-primary mt-2">Buscar</div>
+        </div>
+      </form>
     </div>
-    <div class="col-75">
-          <input type="text" name="id" class="form-control" placeholder="Ingresar ID a buscar" required autofocus>
-
-</div>
-</div>
-
-
-  <div class="row">
-    <input type="submit" value="Buscar">
   </div>
+</main>
 
-
-
-
-
-
-
-
-</form>
-
-</table>
-</body>
-</html>
+<?php  
+  include "componentes/footer.php";
+?>
